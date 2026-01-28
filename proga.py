@@ -10,10 +10,11 @@ class Lamp:
     
 
 class Daylightlamp(Lamp):
-    def __init__(self, color_temperarure, bulb_technology,is_active):
-        self.color_temperature = color_temperarure # xxxxK in kelvins 
-        self.bulb_technology = bulb_technology # LED/FLUORESCENT/HALOGEN etc
-        self.is_active = is_active
+    def __init__(self, power, energy_consumption, warranty, color_temperature, bulb_technology, is_active):
+        super().__init__(power, energy_consumption, warranty)
+        self.color_temperature = color_temperature  # xxxxK in kelvins
+        self.bulb_technology = bulb_technology  # LED/FLUORESCENT/HALOGEN etc
+        self.is_active = is_active  # lamp state (on/off)
 
     def turnOn(self):
         self.is_active = True
@@ -23,27 +24,28 @@ class Daylightlamp(Lamp):
     
 
 class Searchlight(Lamp):
-    def __init__(self, application_type, bulb_technology, IP):
+    def __init__(self, power, energy_consumption, warranty, application_type, bulb_technology, IP):
+        super().__init__(power, energy_consumption, warranty)
         self.application_type = application_type # place where it will be used (outdoor/scene/)
         self.bulb_technology = bulb_technology # LED/XENON/LASER/HALOGEN/FLUORESCENT etc
         self.IP = IP # Ingress Protection
         
-    def aceessment(self):
+    def assessment(self):
         if self.application_type == 'outdoor': 
-            if int(self.IP) in range(65,69+1): print('good choise')
-            else: print('bad choise, pick another for this place, it must be more resistant')
+            if int(self.IP) in range(65,69+1): print('good choiсe')
+            else: print('bad choiсe, pick another for this place, it must be more resistant')
         elif self.application_type == 'scene':
             if self.bulb_technology in ['LED','XENON','LASER']: 
-                print('good choise')
-            else: print('bad choise, pick another for this place, choose another bulb technology')
+                print('good choiсe')
+            else: print('bad choiсe, pick another for this place, choose another bulb technology')
         else: print('no info, sorry')
 
-lamp1 = Searchlight('outdoor','LED',68)
-lamp1.aceessment
+# examples
+lamp1 = Searchlight(1000, 200, 40000, 'outdoor', 'LED', 68)
+lamp1.assessment()
 print(lamp1.IP)
 
-my_lamp = Daylightlamp(5000,'LED',False)
+my_lamp = Daylightlamp(60, 10, 50000, 5000, 'LED', False)
 my_lamp.turnOn()
 print(my_lamp.is_active)
-my_lamp.warranty = 50000
 print(my_lamp.warranty, my_lamp.analyse())
